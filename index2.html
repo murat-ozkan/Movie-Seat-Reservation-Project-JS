@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap demo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        height: 100vh;
+        background-color: brown;
+      }
+      .screen {
+        width: 400px;
+        height: 100px;
+        background-color: black;
+        clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+        margin-top: 6rem;
+        margin-bottom: 4rem;
+      }
+
+      .fa-couch {
+        font-size: 30px;
+        color: whitesmoke;
+      }
+      .container-2 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .box {
+        width: 500px;
+        height: 150px;
+        background-color: gray;
+        margin-top: 3rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container justify-content-center align-items-center">
+      <div class="row justify-content-center align-items-center">
+        <div class="screen"></div>
+      </div>
+    </div>
+    <!-- ************************ -->
+    <div class="container seats">
+      <div class="d-flex justify-content-center">
+        <i id="01" class="fa-solid fa-couch m-3"></i>
+        <i id="02" class="fa-solid fa-couch m-3"></i>
+        <i id="03" class="fa-solid fa-couch m-3"></i>
+        <i id="04" class="fa-solid fa-couch m-3"></i>
+        <i id="05" class="fa-solid fa-couch m-3"></i>
+        <i id="06" class="fa-solid fa-couch m-3"></i>
+        <i id="07" class="fa-solid fa-couch m-3"></i>
+      </div>
+      <div class="d-flex justify-content-center">
+        <i id="08" class="fa-solid fa-couch m-3"></i>
+        <i id="09" class="fa-solid fa-couch m-3"></i>
+        <i id="10" class="fa-solid fa-couch m-3"></i>
+        <i id="11" class="fa-solid fa-couch m-3"></i>
+        <i id="12" class="fa-solid fa-couch m-3"></i>
+        <i id="13" class="fa-solid fa-couch m-3"></i>
+        <i id="14" class="fa-solid fa-couch m-3"></i>
+      </div>
+      <div class="d-flex justify-content-center">
+        <i id="15" class="fa-solid fa-couch m-3"></i>
+        <i id="16" class="fa-solid fa-couch m-3"></i>
+        <i id="17" class="fa-solid fa-couch m-3"></i>
+        <i id="18" class="fa-solid fa-couch m-3"></i>
+        <i id="19" class="fa-solid fa-couch m-3"></i>
+        <i id="20" class="fa-solid fa-couch m-3"></i>
+        <i id="21" class="fa-solid fa-couch m-3"></i>
+      </div>
+    </div>
+    <div class="container-2">
+      <div class="box">
+        <form action="submit">
+          <button type="submit" id="reserveButton">Reserve Seat(s)</button>
+        </form>
+      </div>
+    </div>
+    <!-- ************************ -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      let selectedSeats = [];
+
+      // add event listeners to seats
+      const seats = document.querySelectorAll(".fa-couch");
+      seats.forEach(function (seat) {
+        seat.addEventListener("click", changeSeatColor);
+      });
+
+      // add event listener to reserve button
+      const reserveButton = document.querySelector("#reserveButton");
+      reserveButton.addEventListener("click", reserveSeats);
+
+      // change seat color on click
+      function changeSeatColor(event) {
+        const seat = event.target;
+        const seatId = seat.id;
+
+        if (selectedSeats.includes(seatId)) {
+          seat.style.backgroundColor = "";
+          const index = selectedSeats.indexOf(seatId);
+          selectedSeats.splice(index, 1);
+        } else {
+          seat.style.backgroundColor = "blue";
+          selectedSeats.push(seatId);
+        }
+      }
+
+      // reserve selected seats
+      function reserveSeats() {
+        const seats = document.querySelectorAll(".fa-couch");
+        seats.forEach(function (seat) {
+          if (selectedSeats.includes(seat.id)) {
+            seat.style.backgroundColor = "red";
+            seat.style.pointerEvents = "none";
+          }
+        });
+
+        selectedSeats = [];
+      }
+    </script>
+  </body>
+</html>
