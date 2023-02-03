@@ -1,20 +1,29 @@
 const seats = document.querySelectorAll(".fa-solid.fa-couch");
-const chosenSeat = [];
+let emptySeat = document.getElementById("emptySeat");
+let chosenSeats = document.getElementById("chosenSeats");
+let chosenSeats2 = document.getElementById("chosenSeats-2");
+let ticketPrice = 9;
+let totalPrice = document.getElementById("totalPrice");
+let chosenSeatList = [];
+let reservedSeatList = [];
 
 for (const seat of seats) {
   seat.addEventListener("click", function () {
-    console.log("start " + this.style.color + this.id);
-    if (this.style.color === "") {
+    if (this.style.color === "gray") {
       this.style.color = "green";
       console.log(this.id);
-      if (!chosenSeat.includes(this.id)) {
-        chosenSeat.push(this.id);
-        console.log(chosenSeat);
+      if (!chosenSeatList.includes(this.id)) {
+        chosenSeatList.push(this.id);
+        chosenSeats.innerText = chosenSeatList.length;
+        chosenSeats2.innerText = chosenSeatList.length;
+        totalPrice.innerText = chosenSeats.innerText * ticketPrice;
       }
     } else {
-      chosenSeat.splice(this.id);
-      this.style.color = "";
-      console.log(chosenSeat);
+      this.style.color = "gray";
+      chosenSeatList = chosenSeatList.filter((seatId) => seatId !== this.id); //! chosenSeatList.splice(this.id) olmadı nedense....
+      chosenSeats.innerText = chosenSeatList.length;
+      chosenSeats2.innerText = chosenSeatList.length;
+      totalPrice.innerText = chosenSeats.innerText * ticketPrice;
     }
   });
 }
@@ -22,5 +31,8 @@ for (const seat of seats) {
 const reserveButton = document.querySelector("#reserveButton");
 reserveButton.addEventListener("click", function () {
   console.log("ara beni");
+  for (seat of chosenSeatList) {
+    document.getElementById(seat).style.pointerEvents = "none";
+    document.getElementById(seat).style.color = "black";
+  }
 });
-// this.style.pointerEvents = 'none';
