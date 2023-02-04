@@ -34,5 +34,22 @@ reserveButton.addEventListener("click", function () {
   for (seat of chosenSeatList) {
     document.getElementById(seat).style.pointerEvents = "none";
     document.getElementById(seat).style.color = "black";
+    reservedSeatList.push(seat);
+    emptySeat.innerText = reservedSeatList.length;
+    chosenSeatList = chosenSeatList.filter((seatId) => seatId !== seat);
+    chosenSeats.innerText = chosenSeatList.length;
+    chosenSeats2.innerText = chosenSeatList.length;
+    totalPrice.innerText = chosenSeats.innerText * ticketPrice;
+    if (reservedSeatList.length == 24) {
+      const box = document.getElementById("box");
+      box.remove();
+      const div = document.createElement("div");
+      const node = document.createTextNode(
+        "We are sorry! There is no empty seat right now."
+      );
+      div.appendChild(node);
+      const element = document.getElementById("container-2");
+      element.appendChild(div);
+    }
   }
 });
