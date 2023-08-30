@@ -4,6 +4,6 @@
 
 # You can try it using this link 👇
 
-# https://murat-ozkan.github.io/movie_seat/
+# https://murat-ozkan.github.io/Movie-Seat-Reservation-Project-JS/
 
 # Thank you for your interest.
